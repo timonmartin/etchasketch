@@ -1,0 +1,1 @@
+An Etch-A-Sketch for the browser, built using Javascipt. Part of The Odin Project's curriculum.
