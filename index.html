@@ -7,7 +7,31 @@
 <body>
   <div id="gridContainer"></div>
   <script>
-    
+    const container = document.querySelector("#gridContainer");
+    for (i = 0; i < 16; i++) {
+      for (j = 0; j < 16; j++) {
+        let div = document.createElement("div");
+        div.setAttribute("style", "height: 50px; width: 50px; background-color: red; float: left");
+        div.classList.add("pixel");
+        container.appendChild(div);
+      }
+      let clearDiv = document.createElement("div");
+      clearDiv.style.clear = "left";
+      container.appendChild(clearDiv);
+    }
+    const pixels = document.querySelectorAll("div.pixel");
+    pixels.forEach((pixel) => {
+      pixel.addEventListener("mouseover", () => {
+        pixel.style.background = "white";
+        pixel.style.transition = "0s";
+      });
+      pixel.addEventListener("mouseout", () => {
+        pixel.style.background = "red";
+        pixel.style.transition = "2s";
+      });
+
+    });
+
   </script>
 </body>
 </html>
