@@ -1,5 +1,23 @@
+button {
+	font-family: 'Karla', sans-serif;
+	font-size: 14px;
+	display: block;
+	border-radius: 2em;
+	font-weight: 300;
+	padding: 5px 10px;
+	margin: 10px auto;
+	background-color: #4eb5f1;
+	color: #FFFFFF;
+	outline: none;
+	transition: all 0.2s;
+}
+
+button:hover {
+	background-color: #4095c6;
+}
+
 #gridContainer {
-	width: 760px;
-	height: 760px;
+	width: 720px;
+	height: 720px;
 	margin: 0 auto;
 }

@@ -3,34 +3,52 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
   <title>Etch-A-Sketch</title>
 </head>
 <body>
+  <button>This pic sux, gimme another pad plz</button>
   <div id="gridContainer"></div>
   <script>
     const container = document.querySelector("#gridContainer");
-    let squares = prompt("Enter a size");
-    let gridSize = 760 / squares;
-    for (i = 0; i < squares; i++) {
-      for (j = 0; j < squares; j++) {
-        let div = document.createElement("div");
-        div.setAttribute("style", "background-color: red; float: left");
-        div.style.width = gridSize + "px";
-        div.style.height = gridSize + "px";
-        div.classList.add("pixel");
-        container.appendChild(div);
-      }
-      let clearDiv = document.createElement("div");
-      clearDiv.style.clear = "left";
-      container.appendChild(clearDiv);
-    }
-    const pixels = document.querySelectorAll("div.pixel");
-    pixels.forEach((pixel) => {
-      pixel.addEventListener("mouseover", () => {
-        pixel.style.background = "white";
-      });
-    });
 
+    function buildSketchPad() {
+     let squares = prompt("Enter an amount of pixels per side for your grid, between 0 and 200");
+      while (squares > 200 || squares < 0) {
+        alert("That's either too big or less than 0!");
+        squares = prompt("Enter an amount of pixels per side for your grid, between 0 and 200");
+      }
+      let gridSize = 720 / squares;
+      for (i = 0; i < squares; i++) {
+        for (j = 0; j < squares; j++) {
+          let div = document.createElement("div");
+          div.setAttribute("style", "background-color: red; float: left");
+          div.style.width = gridSize + "px";
+          div.style.height = gridSize + "px";
+          div.classList.add("pixel");
+          container.appendChild(div);
+        }
+        let clearDiv = document.createElement("div");
+        clearDiv.style.clear = "left";
+        container.appendChild(clearDiv);
+      }
+      const pixels = document.querySelectorAll("div.pixel");
+      pixels.forEach((pixel) => {
+        pixel.addEventListener("mouseover", () => {
+          pixel.style.background = "white";
+        });
+      }); 
+    }
+    
+    buildSketchPad();
+
+    const button = document.querySelector("button");
+    button.addEventListener("click", () => {
+      while (container.hasChildNodes()) {
+        container.removeChild(container.firstChild);
+      }
+      buildSketchPad();
+    });
   </script>
 </body>
 </html>
