@@ -2,16 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Etch-A-Sketch</title>
 </head>
 <body>
   <div id="gridContainer"></div>
   <script>
     const container = document.querySelector("#gridContainer");
-    for (i = 0; i < 16; i++) {
-      for (j = 0; j < 16; j++) {
+    let squares = prompt("Enter a size");
+    let gridSize = 960 / squares;
+    for (i = 0; i < squares; i++) {
+      for (j = 0; j < squares; j++) {
         let div = document.createElement("div");
-        div.setAttribute("style", "height: 50px; width: 50px; background-color: red; float: left");
+        div.setAttribute("style", "background-color: red; float: left");
+        div.style.width = gridSize + "px";
+        div.style.height = gridSize + "px";
         div.classList.add("pixel");
         container.appendChild(div);
       }
@@ -23,13 +28,7 @@
     pixels.forEach((pixel) => {
       pixel.addEventListener("mouseover", () => {
         pixel.style.background = "white";
-        pixel.style.transition = "0s";
       });
-      pixel.addEventListener("mouseout", () => {
-        pixel.style.background = "red";
-        pixel.style.transition = "2s";
-      });
-
     });
 
   </script>
