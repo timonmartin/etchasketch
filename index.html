@@ -13,11 +13,12 @@
     const container = document.querySelector("#gridContainer");
 
     function buildSketchPad() {
-     let squares = prompt("Enter an amount of pixels per side for your grid, between 0 and 200");
+     let squares = prompt("Enter an amount of pixels per side for your pad, between 0 and 200");
       while (squares > 200 || squares < 0) {
         alert("That's either too big or less than 0!");
         squares = prompt("Enter an amount of pixels per side for your grid, between 0 and 200");
       }
+      /* 720px = size of the container element, so therefore each box will be 720 / the amount the user selects */
       let gridSize = 720 / squares;
       for (i = 0; i < squares; i++) {
         for (j = 0; j < squares; j++) {
@@ -28,20 +29,30 @@
           div.classList.add("pixel");
           container.appendChild(div);
         }
+        /* After each row need an empty div to clear the line */
         let clearDiv = document.createElement("div");
         clearDiv.style.clear = "left";
         container.appendChild(clearDiv);
       }
+
+      /*On mouseover set a random RGB colour and on each pass gradually decrease the brightness by 10% */
       const pixels = document.querySelectorAll("div.pixel");
       pixels.forEach((pixel) => {
+        let pixelBrightness = 100; 
         pixel.addEventListener("mouseover", () => {
-          pixel.style.background = "white";
+          pixel.style.background = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+          if (pixelBrightness > 0) {
+            pixel.style.filter = "brightness(" + pixelBrightness + "%)";
+            pixelBrightness -= 10;
+          }
         });
       }); 
     }
     
     buildSketchPad();
 
+
+    /* Button that emptys out child nodes of container and asks for new grid size  */
     const button = document.querySelector("button");
     button.addEventListener("click", () => {
       while (container.hasChildNodes()) {
